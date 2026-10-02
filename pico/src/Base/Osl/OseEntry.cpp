@@ -1,5 +1,9 @@
 #include <Limine/Limine.h>
 
+#include "Base/KernelBoot/EntryKernelStatics.h"
+
+#include "Graphics/GOPFramebuffer.h"
+
 __attribute__( ( used, section( ".limine_requests" ) ) )
 static volatile u64 LimineBaseRevision[] = LIMINE_BASE_REVISION( 4 );
 
@@ -61,7 +65,7 @@ static void OslHcf()
 
 extern "C" void OseSystemStartup() 
 {
-    if( LIMINE_BASE_REVISION_SUPPORTED( LimineBaseRevision ) == false )
+	if( LIMINE_BASE_REVISION_SUPPORTED( LimineBaseRevision ) == false )
 	{
 		OslHcf();
 	}
@@ -72,5 +76,8 @@ extern "C" void OseSystemStartup()
 		OslHcf();
 	}
 
-    OslHcf();
+	struct limine_framebuffer* pFramebuffer = FramebufferRequest.response->framebuffers[ 0 ];
+
+	GOPFramebuffer fb( pFramebuffer->width * pFramebuffer->height, ( u32* ) pFramebuffer->address, pFramebuffer->width, pFramebuffer->height, pFramebuffer->pitch / ( pFramebuffer->bpp / 8 ), pFramebuffer->bpp );
+	KEntryKernelStatics::Boot( fb );
 }

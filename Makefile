@@ -11,7 +11,7 @@ ASM     = nasm
 CC      = x86_64-elf-g++
 LD      = x86_64-elf-ld
 ASMFLAGS= 
-CFLAGS  = -std=gnu++20 -ffreestanding -O0 -g -Wall -Werror=return-type -Wextra -mno-red-zone -m64 -fno-exceptions -fno-rtti -mcmodel=kernel -mno-red-zone -mgeneral-regs-only -nostdlib -I. -Ipico/src
+CFLAGS  = -std=gnu++20 -ffreestanding -O0 -g -Wall -Werror=return-type -Wextra -mno-red-zone -m64 -fno-exceptions -fno-rtti -mcmodel=kernel -mno-red-zone -mgeneral-regs-only -nostdlib -I. -Ipico/src -include pico/src/Std/AbsoluteMinimum.h
 LDFLAGS = -nostdlib -m elf_x86_64 -static -z max-page-size=0x1000 --gc-sections -T linker.ld 
 
 # -----------------------------

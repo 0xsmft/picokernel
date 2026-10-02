@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 
 typedef uint64_t uinth;
@@ -27,3 +29,5 @@ typedef int16_t iint16;
 
 typedef int8_t i8;
 typedef int8_t int8;
+
+typedef u64 size_t;
